@@ -1,4 +1,6 @@
 # O-Housing stagiaires part
+## Overview
+O-Housing_Stagiaires is a set of APIs for managing stagiaires, rooms, and payments in a housing system. The Stagiaire API allows you to fetch, create, update, and delete stagiaires. The Rooms API enables you to manage rooms, including the ability to fetch all rooms, create or update rooms, delete rooms, and manage stagiaires (participants) within those rooms. The Payments API allows you to manage payments, including fetching, creating, updating, and deleting payments, along with handling monthly payments.
 
 ## Stagiaires API Documentation
 ### Overview
