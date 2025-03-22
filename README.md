@@ -397,6 +397,175 @@ A success message indicating the stagiaire was removed successfully.
 ##### Each room can hold a maximum of 4 stagiaires (based on your business logic).
 ##### When adding a stagiaire, make sure to verify if the stagiaire is already in the room, and if the room has reached its capacity limit.
 
+## Payments API Documentation
+### Overview
+The Payments API allows you to manage payments in the system. You can fetch all payments, create a new payments, update an existing month payment, delete a payments.
+### 1. Get All Payments
+#### Endpoint: 
+GET /api/payments
+#### Description: 
+Fetches all payments in the system.
+#### Response: 
+A list of payment objects.
+#### Example Response:
+```json
+  [
+    {
+        "_id": "67deb25072eab799b52f5469",
+        "stagiaire_id": {
+            "_id": "67dd4ca201fd55b0050cd23e"
+        },
+        "year": "2024/2025",
+        "months": {
+            "septembre_2024": true,
+            "octobre_2024": true,
+            "novembre_2024": true,
+            "décembre_2024": false,
+            "janvier_2025": false,
+            "février_2025": false,
+            "mars_2025": false,
+            "avril_2025": false,
+            "mai_2025": false,
+            "juin_2025": false,
+            "juillet_2025": false,
+            "août_2025": false,
+            "septembre_2025": false
+        },
+        "__v": 0
+    }
+]
+```
+### 2. Get Payment by ID
+#### Endpoint: 
+GET /api/payments/:id
+#### Description: 
+Fetches a single payment by its ID.
+#### URL Parameters:
+id: The unique identifier of the payment.
+#### Response: 
+A payment object with the specified ID.
+#### Example Response:
+```json
+  {
+    "_id": "67deb25072eab799b52f5469",
+    "stagiaire_id": {
+        "_id": "67dd4ca201fd55b0050cd23e"
+    },
+    "year": "2024/2025",
+    "months": {
+        "septembre_2024": true,
+        "octobre_2024": true,
+        "novembre_2024": true,
+        "décembre_2024": false,
+        "janvier_2025": false,
+        "février_2025": false,
+        "mars_2025": false,
+        "avril_2025": false,
+        "mai_2025": false,
+        "juin_2025": false,
+        "juillet_2025": false,
+        "août_2025": false,
+        "septembre_2025": false
+    },
+    "__v": 0
+}
+```
+### 3. Create a New Payment
+#### Endpoint: 
+POST /api/payments
+#### Description: 
+Creates a new payment.
+#### Request Body:
+```json
+{
+    "stagiaire_id": "67ded175b25654b21cb1c742",
+    "startYear": 2024
+}
+```
+#### Response: 
+The newly created payment object.
+#### Example Response:
+```json
+{
+    "stagiaire_id": "67ded175b25654b21cb1c742",
+    "year": "2024/2025",
+    "_id": "67ded5cab25654b21cb1c74b",
+    "months": {
+        "septembre_2024": false,
+        "octobre_2024": false,
+        "novembre_2024": false,
+        "décembre_2024": false,
+        "janvier_2025": false,
+        "février_2025": false,
+        "mars_2025": false,
+        "avril_2025": false,
+        "mai_2025": false,
+        "juin_2025": false,
+        "juillet_2025": false,
+        "août_2025": false,
+        "septembre_2025": false
+    },
+    "__v": 0
+}
+```
+### 4. Update a month in the payment's status
+#### Endpoint: 
+PUT /api/payments/:id
+#### Description: 
+Updates an existing month's status (by default it's false).
+#### URL Parameters:
+id: The unique identifier of the payment.
+#### Request Body:
+```json
+{
+    "month": "septembre_2024",
+    "paid": true
+}
+```
+#### Response: 
+The updated payment object.
+#### Example Response:
+```json
+{
+    "message": "Payment status for septembre_2024 updated",
+    "payment": {
+        "_id": "67ded5cab25654b21cb1c74b",
+        "stagiaire_id": "67ded175b25654b21cb1c742",
+        "year": "2024/2025",
+        "months": {
+            "septembre_2024": true,
+            "octobre_2024": false,
+            "novembre_2024": false,
+            "décembre_2024": false,
+            "janvier_2025": false,
+            "février_2025": false,
+            "mars_2025": false,
+            "avril_2025": false,
+            "mai_2025": false,
+            "juin_2025": false,
+            "juillet_2025": false,
+            "août_2025": false,
+            "septembre_2025": false
+        },
+        "__v": 0
+    }
+}
+```
+### 5. Delete a Payment
+#### Endpoint: 
+DELETE /api/payments/:id
+#### Description: 
+Deletes a payment by its ID.
+#### URL Parameters:
+id: The unique identifier of the payment.
+#### Response: 
+A success message confirming the payment deletion.
+#### Example Response:
+```json 
+  {
+  "message": "Payment record deleted successfully"
+}
+```
 ## Installation
 1. Clone the repository:
    ```bash
