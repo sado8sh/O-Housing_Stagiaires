@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const Stagiaire = require('../models/stagiaire.model');
 
 const getStagiaires = async (req, res) => {
@@ -24,7 +26,34 @@ const getStagiaireById = async (req, res) => {
 
 const createStagiaire = async (req, res) => {
     try {
-        const stagiaire = await Stagiaire.create(req.body);
+        const { nom, prenom, email, password, telephone,  adresse, ville, niveau, filiere} = req.body;
+
+        // Check if the stagiaire already exists
+        const existingStagiaire = await Stagiaire.findOne({ email: email });
+
+        if (existingStagiaire) {
+            const error = new Error('Stagiaire already exists');
+            error.statusCode = 409;
+            throw error;
+        }
+
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const stagiaire = await Stagiaire.create(
+            {
+                nom,
+                prenom,
+                email,
+                password: hashedPassword,
+                telephone,
+                adresse,
+                ville,
+                niveau,
+                filiere
+            }
+        );
         res.status(201).json(stagiaire);
     } catch (error) {
         res.status(500).json({ message: error.message });
