@@ -5,6 +5,11 @@ const Stagiaire = require('../models/stagiaire.model');
 const getStagiaires = async (req, res) => {
     try {
         const stagiaires = await Stagiaire.find({});
+
+        if (!stagiaires || stagiaires.length === 0) {
+            return res.status(404).json({ message: 'No stagiaires found' });
+        }
+
         res.status(200).json(stagiaires);
     } catch (error) {
         res.status(500).json({ message: error.message });
