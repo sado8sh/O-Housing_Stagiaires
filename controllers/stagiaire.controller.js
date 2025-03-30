@@ -31,7 +31,7 @@ const getStagiaireById = async (req, res) => {
 
 const createStagiaire = async (req, res) => {
     try {
-        const { nom, prenom, email, password, telephone,  adresse, ville, niveau, filiere} = req.body;
+        const { nom, prenom, date_naissance, email, password, telephone, etranger, adresse, ville, niveau, filiere} = req.body;
 
         // Check if the stagiaire already exists
         const existingStagiaire = await Stagiaire.findOne({ email: email });
@@ -50,9 +50,11 @@ const createStagiaire = async (req, res) => {
             {
                 nom,
                 prenom,
+                date_naissance,
                 email,
                 password: hashedPassword,
                 telephone,
+                etranger,
                 adresse,
                 ville,
                 niveau,
