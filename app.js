@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const stagiaireRoute = require('./routes/stagiaire.route');
 const roomRoute = require('./routes/room.route');
 const paymentRoute = require('./routes/payment.route');
+const critereRoute = require('./routes/critere.route');
 
 // Middleware
 app.use(express.json());
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/api/stagiaires", stagiaireRoute);
 app.use("/api/rooms", roomRoute);
 app.use("/api/payments", paymentRoute);
+app.use("/api/criteres", critereRoute);
 
 
 // Connect to the database

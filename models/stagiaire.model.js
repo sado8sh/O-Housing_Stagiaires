@@ -10,7 +10,6 @@ const StagiaireSchema = new mongoose.Schema({
     etranger: {type: String, enum: ['oui', 'non'], required: true},
     adresse: {type: String, required: true},
     ville: {type: String, required: true},
-    niveau: {type: String, enum: ['Ts', 'T', 'Q', 'S'], required: true},
     filiere: {type: String, required: true},
 },{ timestamps: true },
 );
